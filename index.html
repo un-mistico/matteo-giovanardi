@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Matteo Giovanardi — Bologna's Finest</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Space+Mono:wght@400;700&display=swap');
+
+  :root {
+    --gold: #d4a843;
+    --dark-gold: #b8922e;
+    --crimson: #8b1a1a;
+    --dark: #0a0a0a;
+    --cream: #f5f0e1;
+    --muted: #9a9286;
+    --hot-pink: #e84393;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--dark);
+    color: var(--cream);
+    font-family: 'Playfair Display', Georgia, serif;
+    overflow-x: hidden;
+  }
+
+  /* Marquee bar */
+  .marquee-bar {
+    background: var(--crimson);
+    color: var(--gold);
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    padding: 8px 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .marquee-inner {
+    display: inline-block;
+    animation: marquee 20s linear infinite;
+  }
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* Hero */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    position: relative;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at 50% 30%, rgba(212,168,67,0.08) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .photo-frame {
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    border: 3px solid var(--gold);
+    padding: 6px;
+    margin-bottom: 32px;
+    position: relative;
+    box-shadow: 0 0 60px rgba(212,168,67,0.15);
+  }
+
+  .photo-frame img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center 20%;
+  }
+
+  .photo-frame::after {
+    content: '★★★';
+    position: absolute;
+    bottom: -16px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--gold);
+    font-size: 24px;
+    letter-spacing: 8px;
+    text-shadow: 0 0 20px rgba(212,168,67,0.5);
+  }
+
+  .subtitle-mono {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: clamp(48px, 8vw, 96px);
+    line-height: 0.95;
+    text-align: center;
+    margin-bottom: 16px;
+    color: var(--cream);
+    text-shadow: 2px 2px 0 rgba(212,168,67,0.3);
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--gold);
+    font-weight: 700;
+  }
+
+  .tagline {
+    font-size: clamp(18px, 3vw, 28px);
+    font-style: italic;
+    color: var(--muted);
+    text-align: center;
+    max-width: 500px;
+    line-height: 1.4;
+    margin-bottom: 48px;
+  }
+
+  .tagline span {
+    color: var(--hot-pink);
+    font-weight: 700;
+  }
+
+  /* Stats bar */
+  .stats-bar {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 48px;
+    padding: 24px;
+    border-top: 1px solid rgba(212,168,67,0.2);
+    border-bottom: 1px solid rgba(212,168,67,0.2);
+  }
+
+  .stat {
+    text-align: center;
+  }
+
+  .stat-number {
+    font-family: 'Space Mono', monospace;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--gold);
+    display: block;
+  }
+
+  .stat-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* CTA */
+  .cta-section {
+    text-align: center;
+    margin-bottom: 80px;
+  }
+
+  .cta-btn {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--dark);
+    font-family: 'Space Mono', monospace;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 20px 48px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-btn:hover {
+    background: var(--hot-pink);
+    color: white;
+    transform: scale(1.05);
+    box-shadow: 0 0 40px rgba(232,67,147,0.3);
+  }
+
+  .cta-btn::before {
+    content: '→';
+    margin-right: 12px;
+  }
+
+  .cta-sub {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    margin-top: 12px;
+  }
+
+  /* Fun Facts */
+  .fun-facts {
+    max-width: 800px;
+    margin: 0 auto 80px;
+    padding: 0 20px;
+  }
+
+  .section-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .section-title::before,
+  .section-title::after {
+    content: ' — ';
+    color: var(--crimson);
+  }
+
+  .fact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+  }
+
+  .fact-card {
+    background: rgba(245,240,225,0.04);
+    border: 1px solid rgba(212,168,67,0.15);
+    padding: 28px 24px;
+    position: relative;
+    transition: all 0.3s ease;
+  }
+
+  .fact-card:hover {
+    border-color: var(--gold);
+    background: rgba(245,240,225,0.07);
+    transform: translateY(-2px);
+  }
+
+  .fact-card::before {
+    content: attr(data-number);
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    font-family: 'Space Mono', monospace;
+    font-size: 36px;
+    font-weight: 700;
+    color: rgba(212,168,67,0.1);
+  }
+
+  .fact-emoji {
+    font-size: 28px;
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .fact-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+
+  .fact-text {
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--cream);
+    font-style: italic;
+  }
+
+  /* Testimonials */
+  .testimonials {
+    max-width: 700px;
+    margin: 0 auto 80px;
+    padding: 0 20px;
+  }
+
+  .testimonial {
+    border-left: 3px solid var(--gold);
+    padding: 20px 24px;
+    margin-bottom: 24px;
+    font-style: italic;
+    font-size: 18px;
+    line-height: 1.5;
+    color: var(--cream);
+  }
+
+  .testimonial-author {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-top: 8px;
+    font-style: normal;
+  }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 40px 20px;
+    border-top: 1px solid rgba(212,168,67,0.1);
+  }
+
+  footer p {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--muted);
+    line-height: 2;
+  }
+
+  footer .heart {
+    color: var(--hot-pink);
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  /* Blinking star */
+  .blink {
+    animation: blink 1.2s step-end infinite;
+  }
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .stats-bar { gap: 24px; }
+    .stat-number { font-size: 24px; }
+    .photo-frame { width: 200px; height: 200px; }
+    .cta-btn { padding: 16px 32px; font-size: 13px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="marquee-bar">
+  <div class="marquee-inner">
+    ★ Bologna's #1 Export Since 1998 ★ &nbsp;&nbsp; — &nbsp;&nbsp; ★ Adult Entertainment Professional ★ &nbsp;&nbsp; — &nbsp;&nbsp; ★ Now Accepting New Collaborations ★ &nbsp;&nbsp; — &nbsp;&nbsp; ★ Method. Stamina. Mustache. ★ &nbsp;&nbsp; — &nbsp;&nbsp; ★ Bologna's #1 Export Since 1998 ★ &nbsp;&nbsp; — &nbsp;&nbsp; ★ Adult Entertainment Professional ★ &nbsp;&nbsp; — &nbsp;&nbsp; ★ Now Accepting New Collaborations ★ &nbsp;&nbsp; — &nbsp;&nbsp; ★ Method. Stamina. Mustache. ★ &nbsp;&nbsp; — &nbsp;&nbsp;
+  </div>
+</div>
+
+<section class="hero">
+  <div class="photo-frame">
+    <img src="matteo.jpg" alt="Matteo Giovanardi — Bologna's Finest" />
+  </div>
+
+  <p class="subtitle-mono">Adult Film Entertainer &bull; Bologna, IT</p>
+
+  <h1>Matteo<br><em>Giovanardi</em></h1>
+
+  <p class="tagline">Where <span>passion</span> meets craft. One take at a time.</p>
+
+  <div class="stats-bar">
+    <div class="stat">
+      <span class="stat-number">2,400+</span>
+      <span class="stat-label">Scenes Completed</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">14"</span>
+      <span class="stat-label">Avg. Take Length</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">98%</span>
+      <span class="stat-label">Satisfaction Rate</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">1</span>
+      <span class="stat-label">Mustache</span>
+    </div>
+  </div>
+
+  <div class="cta-section">
+    <a href="https://www.comune.bologna.it/amministrazione/politici/matteo-lepore" class="cta-btn">Tocchiamoci Ora</a>
+    <p class="cta-sub">Discreet &bull; Professional &bull; Bologna-based</p>
+  </div>
+</section>
+
+<section class="fun-facts">
+  <h2 class="section-title">Fun Facts</h2>
+  <div class="fact-grid">
+
+    <div class="fact-card" data-number="01">
+      <span class="fact-emoji">🥫</span>
+      <div class="fact-title">The Ragù Technique</div>
+      <p class="fact-text">Matteo applies the same slow-cook patience from his nonna's ragù recipe to every single scene. Low heat, long finish.</p>
+    </div>
+
+    <div class="fact-card" data-number="02">
+      <span class="fact-emoji">🏛️</span>
+      <div class="fact-title">Portico Certified</div>
+      <p class="fact-text">The only adult performer who can name all 40km of Bologna's portici. On set trivia night, he always wins.</p>
+    </div>
+
+    <div class="fact-card" data-number="03">
+      <span class="fact-emoji">👁️</span>
+      <div class="fact-title">The Glasses Stay On</div>
+      <p class="fact-text">Those gold wire rims are contractually mandatory. Directors have tried. Matteo doesn't budge. Iconic.</p>
+    </div>
+
+    <div class="fact-card" data-number="04">
+      <span class="fact-emoji">💪</span>
+      <div class="fact-title">Method Preparation</div>
+      <p class="fact-text">Before every shoot, Matteo recharges with piadina and Aperol. It's not a ritual, it's a science.</p>
+    </div>
+
+    <div class="fact-card" data-number="05">
+      <span class="fact-emoji">🍅</span>
+      <div class="fact-title">Sotto Casa Only</div>
+      <p class="fact-text">Refuses to relocate. All shoots within Bologna city limits. "If I can't walk there, I don't perform there."</p>
+    </div>
+
+    <div class="fact-card" data-number="06">
+      <span class="fact-emoji">🎵</span>
+      <div class="fact-title">Sax on Set</div>
+      <p class="fact-text">Requested jazz sax instead of the standard soundtrack once. It stuck. Now every Giovanardi scene has a sultry solo.</p>
+    </div>
+
+  </div>
+</section>
+
+<section class="testimonials">
+  <h2 class="section-title">What They Say</h2>
+
+  <div class="testimonial">
+    "I've worked with hundreds of performers. Matteo brings something the others don't: a truly artisanal approach. He method-acts every scene like it's a Fellini film."
+    <div class="testimonial-author">— Director, Rome International Adult Film Fest</div>
+  </div>
+
+  <div class="testimonial">
+    "He showed up, asked for an espresso, did the scene in one take, then gave me mortadella recommendations. Absolute professional."
+    <div class="testimonial-author">— Co-star, Studio Bologna</div>
+  </div>
+
+  <div class="testimonial">
+    "The mustache alone deserved top billing."
+    <div class="testimonial-author">— AVN Review Panel</div>
+  </div>
+</section>
+
+<footer>
+  <p>
+    © 2026 Matteo Giovanardi &bull; All Rights Reserved &bull; Bologna, Italy
+  </p>
+  <p>
+    Made with <span class="heart">♥</span> and questionable judgment
+  </p>
+  <p class="blink" style="margin-top: 8px; color: var(--hot-pink);">
+    ★ HIRE ME ★
+  </p>
+</footer>
+
+</body>
+</html>
